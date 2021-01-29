@@ -1,0 +1,32 @@
+{%extends 'base_templates.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block mainbody%}
+    <div class="card">
+            <div class="card-body text-center">
+                <h4 class="fw-bold">
+                    {{ Content.name }}
+                </h4>
+            </div>
+        </div>
+    <div class="container-xxl"> {# Main container #}
+        <div data-pym-src="{{ Content.link }}"></div>
+        <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript">
+        </script>
+        <h2>Comments..</h2><a href="{% url 'addcomment' Content.pk%}">Add comment..</a><br>
+        {% if not Content.comment.all %}
+            There is no comment yet
+        {% else %}
+            {% for i in Content.comment.all %}
+                <strong>
+                {{ i.body }}
+                </strong>
+                By:{{ i.name }}
+                Date:{{ i.date }}
+                <hr>
+                <br>
+            {% endfor %}
+        {% endif %}
+    <br>
+    </div>
+{%endblock%}

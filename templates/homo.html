@@ -1,0 +1,48 @@
+{%extends 'base_templates.html' %}
+{%load static%}
+{% load crispy_forms_tags %}
+{%block mainbody%} {# if the contex have cateo then this will run #}
+    {% block search %}
+
+        {% endblock%}
+<div class="welcome">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ request.user.username }}</strong> Welcome to Cland! If you want to be admin/member/staff of this page then please contact <a href="https://www.facebook.com/profile.php?id=100052128484606">samir</a> which allow you to upload edit and delete content of this page
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h1 id="welcome"></h1>
+</div>
+<script>
+var i = 0; //Typewriter for welcome
+var txt = 'Welcome to codeland';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("welcome").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+typeWriter();
+</script>
+<div class="container-xxl"> {# Main container #}
+<h4><a class="btn btn-primary" href="{% url 'Create' %}">Create New post</a></h4>
+        <form method="get">
+     {{ search.form|crispy }}
+<div class="d-grid gap-2 col-6 mx-auto">
+  <button class="btn btn-primary" type="button">Search</button>
+</div>
+            <br>
+    </form>
+    {% for i in Contents %}
+        <div class="card">
+            <div class="card-body">
+            {{ i.name }}
+                <a href="{% url 'homedetail' i.id %}">View</a>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+{%endblock%}

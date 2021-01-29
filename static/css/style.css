@@ -1,0 +1,16 @@
+@media (min-width: 1200px)
+.h2, h2 {
+    font-size: 3rem;
+}
+
+.welcome{
+	text-align: center;
+	font-family: 'PT Serif', serif;
+	margin-top: 0.8%;
+}
+.jadu{
+	display: flex;
+	flex-flow: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}

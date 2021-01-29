@@ -1,0 +1,50 @@
+{%extends 'base_templates.html'%}
+{%load static%}
+{% load crispy_forms_tags %}
+{%block mainbody%}
+<div class="welcome">
+	<h1 id="welcome"></h1>
+</div>
+<script>
+var i = 0; //Typewriter for welcome
+var txt = '{{cateogies.name}}';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("welcome").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+typeWriter();
+</script>
+	<div class="container-xxl">
+<div class="d-grid gap-2 col-6 mx-auto">
+   <a class="btn btn-success" href="{% url 'CreateCateo' %}">Create Cateogry</a>
+
+    <form method="get">
+     {{ search.form.name|as_crispy_field  }}
+        <div class="d-grid gap-2 col-6 mx-auto">
+
+        <button class="btn btn-primary" type="submit">Search</button>
+            <br>
+        </div>
+
+    </form>
+</div>
+
+		<h1 class="text-center">Available topic:</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4" style="max-width: 90%;margin: auto;">
+	{% for i in passing %}
+    <div class="card border-success mb-3" style=";">
+  <div class="card-header bg-transparent border-success">{{i.name}}</div>
+  <div class="card-body text-success">
+    <p class="card-text">{{ i.description }}</p>
+  </div>
+  <div class="card-footer bg-transparent border-success"><h5 class="card-title"><a href="{%url 'detail' i.id%}" class="btn btn-primary">View</a></h5></div>
+</div>
+   	{% endfor %}
+</div>
+	</div>
+{%endblock%}
