@@ -1,0 +1,1 @@
+web: gunicorn codeland.wsgi --log-file -
